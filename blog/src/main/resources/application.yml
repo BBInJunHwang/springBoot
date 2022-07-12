@@ -1,0 +1,52 @@
+#spring:
+ # datasource:
+   #driver-class-name: com.mysql.cj.jdbc.Driver
+   # url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+   # username: cos
+   # password: cos1234
+
+    
+    
+# 스프링 부트는 .yml 파일에 설정함
+# 스프링 xml 파일 같은
+# properties 확장자 사용안함 -> 자동완성 지원하지만 적은 부분 비슷하게 계속 선언해야함
+# 들여쓰기 지원, 중복코드 제거, 가독성 좋음
+# 반드시 : 하고 공백 두개 넣어야함
+# 프로젝트 진입 직전에 yml 읽고 시작한다.
+
+server:
+  port: 8083 # 설정없으면 기본값 8080
+  servlet:
+    context-path: /   # 설정 없으면 /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/orcl
+    username: c##BOOT
+    password: boottest
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create #create 테이블 만든다.=> 프로젝트 할때마다 실행한다, 최초에만 적용, 후에 update 해야함, 아니면 기존 drop 후 새로만든다.
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity(테이블) 만들때 변수명 DB필드명에 넣어준다. SpringPhysicalNamingStrategy 카멜 표기법 적용됨 myEmail -> my_email로 변경 
+      use-new-id-generator-mappings: false #jpa 기본 넘버링 전략 사용안함, 프로젝트에 연결된 넘버링 전략 따라감
+    show-sql: true #sql 로깅처리
+    properties:
+      hibernate.format_sql: true # 한줄로 보이는 로깅을 이쁘게 정렬한다.
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      

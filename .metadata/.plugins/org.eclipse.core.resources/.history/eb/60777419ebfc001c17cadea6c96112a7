@@ -1,0 +1,5 @@
+package com.ijhwang.security1.repository;
+
+public class UserRepository extends JpaRePository<Secur>{
+
+}
