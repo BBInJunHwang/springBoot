@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="customAuthenticationFilter"/>
+		<item key="selection" value="RoleType"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="RoleType"/>
+			<item value="MyFilter"/>
+			<item value="FilterConfig"/>
+			<item value="sec"/>
+			<item value="seci"/>
+			<item value="security"/>
+			<item value="secu"/>
 			<item value="customAuthenticationFilter"/>
 			<item value="filter"/>
 			<item value="AuthenticationManager"/>
@@ -16,13 +23,6 @@
 			<item value="securityConfig"/>
 			<item value="AuthenticationProvider"/>
 			<item value="UsernamePasswordAuthenticationToken"/>
-			<item value="SuccessHandler"/>
-			<item value="successHandler"/>
-			<item value="successHn"/>
-			<item value="success"/>
-			<item value="objectMapper"/>
-			<item value="loadUserByUsername"/>
-			<item value="form"/>
 		</list>
 		<list key="replacehistory">
 		</list>

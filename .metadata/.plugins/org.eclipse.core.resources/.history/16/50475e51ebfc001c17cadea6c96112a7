@@ -1,8 +1,0 @@
-package com.ijhwang.security1.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.ijhwang.security1.model.SecurityUser;
-
-public interface UserRepository extends JpaRepository<SecurityUser, Integer> {
-
-}

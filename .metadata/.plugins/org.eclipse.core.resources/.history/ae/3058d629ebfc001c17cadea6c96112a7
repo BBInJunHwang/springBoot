@@ -1,5 +1,0 @@
-package com.ijhwang.security1.repository;
-
-public interface UserRepository {
-
-}

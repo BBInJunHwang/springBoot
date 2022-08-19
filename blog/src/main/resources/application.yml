@@ -38,7 +38,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create #create 테이블 만든다.=> 프로젝트 할때마다 실행한다, 최초에만 적용, 후에 update 해야함, 아니면 기존 drop 후 새로만든다.
+      ddl-auto: update #create 테이블 만든다.=> 프로젝트 할때마다 실행한다, 최초에만 적용, 후에 update 해야함, 아니면 기존 drop 후 새로만든다.
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity(테이블) 만들때 변수명 DB필드명에 넣어준다. SpringPhysicalNamingStrategy 카멜 표기법 적용됨 myEmail -> my_email로 변경 
       use-new-id-generator-mappings: false #jpa 기본 넘버링 전략 사용안함, 프로젝트에 연결된 넘버링 전략 따라감
