@@ -1,10 +1,10 @@
-package com.mcnc.distribution;
+package com.ijhwang;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DistributionApplicationTests {
+class MyProjectApplicationTests {
 
 	@Test
 	void contextLoads() {

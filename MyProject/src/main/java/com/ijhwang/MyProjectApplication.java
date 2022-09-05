@@ -1,13 +1,13 @@
-package com.mcnc.distribution;
+package com.ijhwang;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DistributionApplication {
+public class MyProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DistributionApplication.class, args);
+		SpringApplication.run(MyProjectApplication.class, args);
 	}
 
 }
