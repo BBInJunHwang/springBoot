@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.ijhwang.jwt.model.UserInfo;
 import com.ijhwang.user.dto.UserRequestDto;
 import com.ijhwang.user.dto.UserResponseDto;
 import com.ijhwang.user.repository.UserRepository;
@@ -35,7 +36,6 @@ class UserServiceTest {
 		UserRequestDto userRequestDto = new UserRequestDto();
 		userRequestDto.setUserId("ijhwang");
 		
-		UserResponseDto  userResponseDto = userService.findUser(userRequestDto);
-		
+		//UserInfo  userInfo = userService.findUser(userRequestDto);
 	}
 }

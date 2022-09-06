@@ -3,6 +3,7 @@ package com.ijhwang.jwt.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,12 +12,16 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import com.ijhwang.common.domain.CommonEntity;
+import com.ijhwang.user.dto.UserRequestDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +32,10 @@ import lombok.NoArgsConstructor;
 @Builder 
 @Entity  
 @Getter
+@DynamicInsert
+@DynamicUpdate
 @Where(clause = "delYn = 'N'")
+@SQLDelete(sql ="UPDATE USERINFO SET DELYN = 'Y' WHERE USERID = ?")
 public class UserInfo extends CommonEntity{
 	
 	@Id
@@ -44,10 +52,10 @@ public class UserInfo extends CommonEntity{
 	private RoleType roleType; // type을 enum에  적용된 값만 강제된다. USERs 같이 오타방지
 	
 	@ColumnDefault("'N'")
-	@Column(nullable = false, length =1) 
+	@Column(length =1) 
 	private String delYn;
 	
-	@ManyToOne(fetch = FetchType.LAZY) // Many = Board, User = One , 한명의 User는 여러개 board 작성 가능하다
+	@ManyToOne(fetch = FetchType.LAZY) // Many = User, Team = One , 한명의 User는 여러개 Team 소속 가능하다
 	@JoinColumn(name="teamId")
 	private TeamInfo teamInfo;
 	
@@ -59,6 +67,18 @@ public class UserInfo extends CommonEntity{
 		this.roleType = roleType;
 		this.teamInfo = teamInfo;
 	}
+	
+	public void update(UserRequestDto requestDto) {
+		this.password = requestDto.getPassword();
+		this.username = requestDto.getUsername();
+		this.roleType = requestDto.getRoleType();
+		this.updateId = requestDto.getUserId();
+	}
+	
+	public void delete() {
+		this.delYn = "Y";
+	}
+	
 	
 	public List<RoleType> getRoleList(){
 		if(null != roleType) {

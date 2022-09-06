@@ -1,8 +1,7 @@
 package com.ijhwang.user.dto;
 
-import com.ijhwang.jwt.model.RoleType;
-import com.ijhwang.jwt.model.TeamInfo;
 import com.ijhwang.jwt.model.UserInfo;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,16 +10,15 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
 	
 	private String userId;
-	private String password;
 	private String username;
-	private RoleType roleType;
-	private TeamInfo teamInfo;
+	private TeamResponseDto teamResponseDto;
 	
 	public UserResponseDto(UserInfo userInfo) {
 		this.userId = userInfo.getUserId();
-		this.password = userInfo.getPassword();
 		this.username = userInfo.getUsername();
-		this.roleType = userInfo.getRoleType();
-		this.teamInfo = userInfo.getTeamInfo();
+		this.teamResponseDto = TeamResponseDto.builder()
+												.teamId(userInfo.getTeamInfo().getTeamId())
+												.teamName(userInfo.getTeamInfo().getTeamName())
+												.build();
 	}
 }

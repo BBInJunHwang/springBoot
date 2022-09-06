@@ -54,11 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.addFilter(new JwtAuthorizationFilter(authenticationManager(),userRepository))
 		.authorizeRequests()
 		.antMatchers("/api/v1/user/**")
-		.access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
+		.access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 		.antMatchers("/api/v1/manager/**")
-		.access("hasRole('MANAGER') or hasRole('ADMIN')")
+		.access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 		.antMatchers("/api/v1/admin/**")
-		.access("hasRole('ADMIN')")
+		.access("hasRole('ROLE_ADMIN')")
 		.anyRequest().permitAll();
 
 		// formLogin().disable로 인해서 "/login" 들어올시 로그인 처리가 불가능하다. 직접 로그인 처리 가능한 로직 구현해야함

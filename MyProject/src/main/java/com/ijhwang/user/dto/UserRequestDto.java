@@ -15,16 +15,16 @@ public class UserRequestDto {
 	private String password;
 	private String username;
 	private RoleType roleType;
-	private TeamInfo teamInfo;
+	private TeamRequestDto teamRequestDto;
 
 	
 	@Builder
-	public UserRequestDto(String userId, String password, String username, RoleType roleType,TeamInfo teamInfo) {
+	public UserRequestDto(String userId, String password, String username, RoleType roleType,TeamRequestDto teamRequestDto) {
 		this.userId = userId;
 		this.password = password;
 		this.username = username;
 		this.roleType = roleType;
-		this.teamInfo = teamInfo;
+		this.teamRequestDto = teamRequestDto;
 	}
 	
 	//dto -> entity
@@ -34,8 +34,7 @@ public class UserRequestDto {
 				       .password(password)
 				       .username(username)
 				       .roleType(roleType)
-				       .teamInfo(teamInfo)
+				       .teamInfo(TeamInfo.builder().teamId(teamRequestDto.getTeamId()).teamName(teamRequestDto.getTeamName()).build())
 				       .build();
 	}
-	
 }
