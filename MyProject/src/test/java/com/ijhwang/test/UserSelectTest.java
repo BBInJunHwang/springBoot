@@ -1,8 +1,5 @@
 package com.ijhwang.test;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.data.domain.Sort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,25 +28,11 @@ class UserSelectTest {
 		UserInfo userInfo = userRepository.findByUserId("ijhwang6").orElseThrow(()->{
 			return new IllegalArgumentException("해당 유저는 없습니다.");
 		});
-		System.out.println("end");
+		
+		System.out.println("eager vs lazy");
 		
 		UserResponseDto userResponseDto = new UserResponseDto(userInfo);
 		System.out.println(userResponseDto);
-		
-		
-		List<UserResponseDto> userResponseDtoList = new ArrayList<>();
-		List<UserInfo> userInfoList = userRepository.findAll(Sort.by(Sort.Direction.DESC, "createdate"));
-		
-		userInfoList.forEach(s->{if(null != s) {
-			userResponseDtoList.add(new UserResponseDto(s));
-		}});
-		
-		userResponseDtoList.forEach(s->{if(null != s) {
-			System.out.println(s);
-		}});
-		
-		
-		
 		//System.out.println(userInfo);
 	}
 

@@ -55,7 +55,8 @@ public class UserInfo extends CommonEntity{
 	@Column(length =1) 
 	private String delYn;
 	
-	@ManyToOne(fetch = FetchType.LAZY) // Many = User, Team = One , 한명의 User는 여러개 Team 소속 가능하다
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="teamId")
 	private TeamInfo teamInfo;
 	

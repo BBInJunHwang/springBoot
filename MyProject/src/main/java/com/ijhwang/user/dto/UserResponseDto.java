@@ -13,6 +13,8 @@ public class UserResponseDto {
 	private String username;
 	private TeamResponseDto teamResponseDto;
 	
+	
+	
 	public UserResponseDto(UserInfo userInfo) {
 		this.userId = userInfo.getUserId();
 		this.username = userInfo.getUsername();
