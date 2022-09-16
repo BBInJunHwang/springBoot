@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -59,6 +60,9 @@ public class UserInfo extends CommonEntity{
 	//@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="teamId")
 	private TeamInfo teamInfo;
+	
+	@OneToOne(mappedBy = "userInfo",fetch = FetchType.EAGER)
+	private UserDetailInfo userDetailInfo;
 	
 	@Builder
 	public UserInfo(String userId, String password, String username, RoleType roleType,TeamInfo teamInfo) {
