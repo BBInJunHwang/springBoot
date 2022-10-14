@@ -1,8 +1,8 @@
-package com.spring.batch.processor;
+package com.spring.batch.sample.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 
-import com.spring.batch.model.Person;
+import com.spring.batch.sample.model.Person;
 
 import lombok.extern.slf4j.Slf4j;
 

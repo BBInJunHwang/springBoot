@@ -1,4 +1,4 @@
-package com.spring.batch.model;
+package com.spring.batch.sample.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

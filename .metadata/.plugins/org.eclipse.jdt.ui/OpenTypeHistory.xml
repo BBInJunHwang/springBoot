@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+    <typeInfo handle="=SpringBatchTest/C:\/Users\/mcnc\/.m2\/repository\/org\/springframework\/batch\/spring-batch-core\/4.3.7\/spring-batch-core-4.3.7.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.batch=/=/maven.artifactId=/spring-batch-core=/=/maven.version=/4.3.7=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.batch.core.step.item(ChunkOrientedTasklet.class[ChunkOrientedTasklet" modifiers="33" timestamp="1664260804719"/>
+</typeInfoHistroy>

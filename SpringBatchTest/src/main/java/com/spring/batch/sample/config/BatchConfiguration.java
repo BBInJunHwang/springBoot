@@ -1,4 +1,4 @@
-package com.spring.batch.config;
+package com.spring.batch.sample.config;
 
 
 import javax.sql.DataSource;
@@ -20,9 +20,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import com.spring.batch.listener.JobCompletionNotificationListener;
-import com.spring.batch.model.Person;
-import com.spring.batch.processor.PersonItemProcessor;
+import com.spring.batch.sample.listener.JobCompletionNotificationListener;
+import com.spring.batch.sample.model.Person;
+import com.spring.batch.sample.processor.PersonItemProcessor;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +35,12 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * JdbcBatchItemWriter - ORM 사용 아닌경우 대부분 사용, JDBC의 Batch 기능 이용해 한번에 query를 모은 후 DB로 전달 후 내부에서 모은 쿼리실행              
  * 					   - 어플리케이션과 데이터베이스 간에 데이터를 주고 받는 회수를 최소화 하여 성능 향상
+ * 
+ * RPW 순으로 진행 Read Processor Writer
+ * 
+ * 
+ * Chunk 		- 각 커밋 사이에 처리되는 row 수, Chunk 지향 처리란 한 번에 하나씩 데이터를 읽어 Chunk라는 덩어리를 만든 뒤, Chunk 단위로 트랜잭션 처리
+ * 				- Chunk 단위로 트랜잭션을 수행하기 때문에 실패할 경우엔 해당 Chunk 만큼만 롤백, 이전에 커밋된 트랜잭션 범위까지는 반영
  * 
  * */
 
@@ -49,6 +55,9 @@ public class BatchConfiguration {
 	
     @Autowired 
     public StepBuilderFactory stepBuilderFactory;	// stepBuilder ? 생성? -> factory가 여러 기능 제공?
+    												// StepBuilderFactory 할때 StepBuilderFactory.class 열어보면 transactionManager를 주입 받은 후 
+    												// stepBuilderFactory.get("step1") 이런식으로 get할때 같이 넣어줘서 전달한다.	-> 트랜잭션 관리한다.
+    												// read하기 이전부터 트랜잭션이 걸리며, 중간 processor 등 어디서 에러 발생시 rollback 된다.
 
     @Bean
     public FlatFileItemReader<Person> reader() {	// FlatFileItemReader 파일을 읽을 수 있는 클래스
@@ -79,9 +88,9 @@ public class BatchConfiguration {
     }
     
     @Bean
-    public Step step1(JdbcBatchItemWriter<Person> writer) {
+    public Step step1(JdbcBatchItemWriter<Person> writer) {		// step 이란 job을 구성하는 하나 단계, 실제로 배치 실행되는 처리 정의 및 컨트롤 
        return stepBuilderFactory.get("step1")
-          .<Person, Person> chunk(10)
+          .<Person, Person> chunk(10)		// chunk 단위로 데이터 처리, chunk 단위로 Reader에 맞춘 후 chunk 단위만큼 다 차면 Processor를 하나씩 process한다. chunk단위 만큼 다 처리하면 writer에서 한번에 처리한다.
           .reader(reader())
           .processor(processor())
           .writer(writer)

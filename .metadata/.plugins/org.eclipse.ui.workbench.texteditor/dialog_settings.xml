@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Sort"/>
+		<item key="selection" value="write"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="Sort"/>
-			<item value="sort"/>
-			<item value="saveAll"/>
-			<item value="test"/>
-			<item value="attemptAuthentication"/>
-			<item value="RoleType"/>
-			<item value="MyFilter"/>
-			<item value="FilterConfig"/>
-			<item value="sec"/>
-			<item value="seci"/>
-			<item value="security"/>
-			<item value="secu"/>
-			<item value="customAuthenticationFilter"/>
-			<item value="filter"/>
-			<item value="AuthenticationManager"/>
+			<item value="write"/>
+			<item value="1"/>
+			<item value="jpaPageJob1"/>
+			<item value="JobCompletionNotificationListener"/>
+			<item value="importUserJob"/>
+			<item value="page"/>
+			<item value="provide"/>
+			<item value="execute"/>
+			<item value="excute"/>
+			<item value="createTasklet"/>
+			<item value="Tasklet"/>
+			<item value="createTas"/>
+			<item value="create"/>
+			<item value="stepBuilderFactory"/>
+			<item value="StepBuilderFactory"/>
 		</list>
 		<list key="replacehistory">
+			<item value="2"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

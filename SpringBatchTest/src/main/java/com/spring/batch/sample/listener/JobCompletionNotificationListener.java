@@ -1,4 +1,4 @@
-package com.spring.batch.listener;
+package com.spring.batch.sample.listener;
 
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
@@ -6,7 +6,7 @@ import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.spring.batch.model.Person;
+import com.spring.batch.sample.model.Person;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
