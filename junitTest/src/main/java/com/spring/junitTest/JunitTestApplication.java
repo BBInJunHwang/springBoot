@@ -20,6 +20,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * url : jdbc:h2:mem:test 설정
  * username 그대로, pw 없이 testConnection 해서 h2-console 접속 가능하다.
  * 
+ * git은 패키지 비어있으면 정상적으로 반영 안될떄가 있다.
+ * 
  * */
 
 @SpringBootApplication
