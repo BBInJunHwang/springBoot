@@ -22,6 +22,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 
  * git은 패키지 비어있으면 정상적으로 반영 안될떄가 있다.
  * 
+ * 
+ * test 순서
+ * 1. Repository 테스트 (책임 : DB 쪽 저장, 조회 잘되는지)
+ * 2. Service 테스트 (책임 : 기능들이 순서에 맞게 수행되는지, 트랜잭션 잘타는지)
+ * 3. Controller 테스트 (책임 : 클라이언트와 테스트, 파라미터 null 체크)
+ * 
  * */
 
 @SpringBootApplication
