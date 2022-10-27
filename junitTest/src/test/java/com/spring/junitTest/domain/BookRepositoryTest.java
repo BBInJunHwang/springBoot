@@ -64,7 +64,7 @@ public class BookRepositoryTest {
 	@BeforeEach // 각 테스트 시작 전에 한번씩 시작함 -> 메서드 하나씩만 트랜잭션이 묶인다. (책등록, 책목록, 책한권 개별로 묶임)
 	public void 데이터준비() {
 		System.out.println("Before Data Ready----------------------------------");
-		String title = "Junit";
+		String title = "junit5";
 		String author = "ijhwang01";
 		Book book = Book.builder().title(title).author(author).build();
 		bookRepository.save(book);
@@ -77,7 +77,7 @@ public class BookRepositoryTest {
 		
 		// controller, service 메모리에 띄는게 아니기 때문에 직접 데이터(request)를 준비해야한다.
 		// 1. given (데이터 준비)
-		String title = "Junit5";
+		String title = "junit";
 		String author = "ijhwang";
 		
 		// Repository 에서는 이미 Service에서 Dto -> Entity로 변환되어서 값이 들어왔다 가정하고 Book 빌더한다.
@@ -103,7 +103,7 @@ public class BookRepositoryTest {
 	@Test	
 	public void 책목록보기_test() {
 		// given
-		String title = "Junit";
+		String title = "junit5";
 		String author = "ijhwang01";
 		// when
 		List<Book> booksPS = bookRepository.findAll();
@@ -118,7 +118,7 @@ public class BookRepositoryTest {
 	@Test
 	public void 책한권보기_test() {
 		// given
-		String title = "Junit";
+		String title = "junit5";
 		String author = "ijhwang01";
 		
 		// when
@@ -142,4 +142,35 @@ public class BookRepositoryTest {
 		//then
 		assertFalse(bookRepository.findById(id).isPresent()); // false 이면 성공 -> isPresent는 Optional 안에 뭔가가 있으면 true 반환 없으면 false 반환 
 	}
+	
+	@Sql("classpath:db/tableInit.sql") 
+	@Order(5)
+	@Test
+	public void 책수정_test() {
+		// given
+		Long id = 1L;
+		String title = "junit5 수정";
+		String author ="ijhwang01 수정";
+		Book book = new Book(id,title,author);
+		
+		//when
+		// 원래라면 dirty check를 해야하지만, before 데이터 insert 가 미리 되버리기 때문에 불가능 , save 에 1L 가 있기때문에 merge 수행
+		Book bookPS = bookRepository.save(book);
+		
+//		bookRepository.findAll().stream()
+//		.forEach(b -> {
+//			System.out.println("-----------------------");
+//			System.out.println(b.getId());
+//			System.out.println(b.getTitle());
+//			System.out.println(b.getAuthor());
+//			System.out.println("-----------------------");
+//			});
+
+		//then
+		assertEquals(id, bookPS.getId());
+		assertEquals(title, bookPS.getTitle());
+		assertEquals(author, bookPS.getAuthor());
+	}
+	
+	
 }
