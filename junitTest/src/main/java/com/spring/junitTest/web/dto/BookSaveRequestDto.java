@@ -13,9 +13,6 @@ import lombok.Setter;
  * 
  * */
 
-
-
-
 @Setter // Controller 에서 setter 가 호출되면서 Dto에 값이 채워짐
 public class BookSaveRequestDto {
 

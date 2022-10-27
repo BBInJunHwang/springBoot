@@ -28,6 +28,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 2. Service 테스트 (책임 : 기능들이 순서에 맞게 수행되는지, 트랜잭션 잘타는지)
  * 3. Controller 테스트 (책임 : 클라이언트와 테스트, 파라미터 null 체크)
  * 
+ * 이렇게 메서드는 하나의 기능(하나의 책임만을 줘야한다 -> 추적가능)
+ * 
  * */
 
 @SpringBootApplication
