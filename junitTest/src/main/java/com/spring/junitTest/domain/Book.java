@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity // 테이블 생성
 @Getter // setter 사용 금지
@@ -31,6 +32,9 @@ public class Book {
 		this.title = title;
 		this.author = author;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
+	}
 }

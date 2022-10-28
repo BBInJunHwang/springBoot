@@ -20,7 +20,7 @@ public class BookSaveRequestDto {
 	private String author;
 	
 	
-	public Book toEntiry() {
+	public Book toEntity() {
 		return Book.builder()
 				.title(title)
 				.author(author)
