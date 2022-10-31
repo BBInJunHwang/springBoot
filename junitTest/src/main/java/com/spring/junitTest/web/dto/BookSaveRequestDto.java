@@ -2,6 +2,7 @@ package com.spring.junitTest.web.dto;
 
 import com.spring.junitTest.domain.Book;
 
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -13,6 +14,7 @@ import lombok.Setter;
  * 
  * */
 
+@Getter
 @Setter // Controller 에서 setter 가 호출되면서 Dto에 값이 채워짐
 public class BookSaveRequestDto {
 
