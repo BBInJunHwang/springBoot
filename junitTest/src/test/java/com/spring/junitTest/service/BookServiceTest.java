@@ -8,8 +8,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.spring.junitTest.domain.BookRepository;
 import com.spring.junitTest.util.MailSenderStub;
-import com.spring.junitTest.web.dto.BookResponseDto;
-import com.spring.junitTest.web.dto.BookSaveRequestDto;
+import com.spring.junitTest.web.dto.request.book.BookSaveRequestDto;
+import com.spring.junitTest.web.dto.response.book.BookResponseDto;
 
 // @Service만 띄우는 테스트 어노테이션은 없다
 @DataJpaTest

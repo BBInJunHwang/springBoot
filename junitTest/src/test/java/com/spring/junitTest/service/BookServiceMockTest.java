@@ -1,21 +1,26 @@
 package com.spring.junitTest.service;
 
+// assertJ 사용
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import org.assertj.core.api.Assertions;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.spring.junitTest.domain.Book;
 import com.spring.junitTest.domain.BookRepository;
 import com.spring.junitTest.util.MailSender;
-import com.spring.junitTest.web.dto.BookResponseDto;
-import com.spring.junitTest.web.dto.BookSaveRequestDto;
-import static org.assertj.core.api.Assertions.*;	// assertJ 사용
+import com.spring.junitTest.web.dto.request.book.BookSaveRequestDto;
+import com.spring.junitTest.web.dto.response.book.BookResponseDto;
 
 
 
@@ -58,11 +63,74 @@ public class BookServiceMockTest {
 //		assertEquals(bookSaveRequestDto.getTitle(), bookResponseDto.getTitle());
 //		assertEquals(bookSaveRequestDto.getAuthor(), bookResponseDto.getAuthor());
 		
+		//https://assertj.github.io/doc/ assertJ 사용법
 		// then assertJ lib 사용 
-		assertThat(bookSaveRequestDto.getTitle()).isEqualTo(bookResponseDto.getTitle());
-		assertThat(bookSaveRequestDto.getAuthor()).isEqualTo(bookResponseDto.getAuthor());
-		
+		assertThat(bookResponseDto.getTitle()).isEqualTo(bookSaveRequestDto.getTitle());
+		assertThat(bookResponseDto.getAuthor()).isEqualTo(bookSaveRequestDto.getAuthor());
 	}
 	
+	@Test
+	public void 책목록보기_테스트() {
+		// given
+		List<Book> books = new ArrayList<>();
+		books.add(new Book(1L,"제목1","저자1"));
+		books.add(new Book(2L,"제목2","저자2"));
+		books.add(new Book(3L,"제목3","저자3"));
+		
+		// stub
+		when(bookRepository.findAll()).thenReturn(books);
+		
+		// when
+		List<BookResponseDto> list = bookServiceAddMail.책목록보기();
+		
+		// then
+		assertThat(list.get(0).getTitle()).isEqualTo("제목1");
+		assertThat(list.get(0).getAuthor()).isEqualTo("저자1");
+		assertThat(list.get(1).getTitle()).isEqualTo("제목2");
+		assertThat(list.get(1).getAuthor()).isEqualTo("저자2");
+		assertThat(list.get(2).getTitle()).isEqualTo("제목3");
+		assertThat(list.get(2).getAuthor()).isEqualTo("저자3");
+	}
 	
+	@Test
+	public void 책한건보기_test() {
+		// given
+		Long id = 1L;
+		Book book = new Book(1L,"제목1","저자1");
+		
+		// findById 는 optional을 반환하기 때문에 감싸줘야함
+		Optional<Book> bookOP = Optional.of(book);
+		
+		// stub
+		when(bookRepository.findById(id)).thenReturn(bookOP);
+		
+		
+		// when
+		BookResponseDto bookResponseDto = bookServiceAddMail.책한건보기(id);
+		
+		// then
+		assertThat(bookResponseDto.getTitle()).isEqualTo(book.getTitle());
+		assertThat(bookResponseDto.getAuthor()).isEqualTo(book.getAuthor());
+	}
+	
+	@Test
+	public void 책수정하기_test() {
+		// given
+		Long id = 1L;
+		BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
+		bookSaveRequestDto.setTitle("제목1 수정");
+		bookSaveRequestDto.setAuthor("저자1 수정");
+		
+		// stub
+		Book book = new Book(1L,"제목1","저자1");
+		Optional<Book> bookOP = Optional.of(book);
+		when(bookRepository.findById(id)).thenReturn(bookOP);
+		
+		// when
+		BookResponseDto bookResponseDto = bookServiceAddMail.책수정하기(id, bookSaveRequestDto);
+		
+		// then
+		assertThat(bookResponseDto.getTitle()).isEqualTo(bookSaveRequestDto.getTitle());
+		assertThat(bookResponseDto.getAuthor()).isEqualTo(bookSaveRequestDto.getAuthor());
+	}
 }

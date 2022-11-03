@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.junitTest.domain.Book;
 import com.spring.junitTest.domain.BookRepository;
-import com.spring.junitTest.web.dto.BookResponseDto;
-import com.spring.junitTest.web.dto.BookSaveRequestDto;
+import com.spring.junitTest.web.dto.request.book.BookSaveRequestDto;
+import com.spring.junitTest.web.dto.response.book.BookResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -62,7 +62,7 @@ public class BookService {
 		//Book bookPS = bookRepository.save(dto.toEntity());  
 		// return bookPS;									  
 		
-		return new BookResponseDto().toDto(bookPS);	// 영속객체 -> 영속끊는 Dto로 변경해 리턴
+		return bookPS.toDto();	// 영속객체 -> 영속끊는 Dto로 변경해 리턴
 															  
 	}	
 	
@@ -70,7 +70,7 @@ public class BookService {
 	public List<BookResponseDto> 책목록보기(){			
 		return bookRepository.findAll()
 				.stream() // List를 stream 하면 type없이 들어오게 되고 기존 객체를 안건드리고 복제됨
-				.map(new BookResponseDto()::toDto) // .map을 하면 하나씩 순회하면서 '다른타입' 으로 변경해서(그대로도 가능)리턴해준다. toDto가 static 이면 new 객체 없이 바로 사용가능
+				.map(Book::toDto) // .map을 하면 하나씩 순회하면서 '다른타입' 으로 변경해서(그대로도 가능)리턴해준다. toDto가 static 이면 new 객체 없이 바로 사용가능
 				.collect(Collectors.toList());	// List로 변환해준다.
 		
 //		return bookRepository.findAll()
@@ -89,10 +89,11 @@ public class BookService {
 	// 3. 하나 조회
 	public BookResponseDto 책한건보기(Long id) {
 		
-		Optional<Book> bookPS = bookRepository.findById(id);
+		Optional<Book> bookOP = bookRepository.findById(id);
 		
-		if(bookPS.isPresent()) {
-			return new BookResponseDto().toDto(bookPS.get());
+		if(bookOP.isPresent()) {
+			Book bookPS = bookOP.get();
+			return bookPS.toDto();
 		}else {
 			throw new RuntimeException("해당 아이디를 찾을 수 없습니다.");
 		}
